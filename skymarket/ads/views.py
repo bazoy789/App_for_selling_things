@@ -1,6 +1,7 @@
 from rest_framework import pagination, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .filters import MyModelFilter
@@ -55,6 +56,10 @@ class CommentViewSet(viewsets.ModelViewSet):
         "partial_update": [IsAuthenticated, IsStuff | IsOwner],
         "destroy": [IsAuthenticated, IsStuff | IsOwner],
     }
+
+    def get_queryset(self):
+        ad_instance = get_object_or_404(Ad, id=self.kwargs["ad.pk"])
+        return ad_instance.comment_set.all()
 
     def get_permission(self):
         return [permission() for permission in self.permissions.get(self.action, self.default_permission)]
