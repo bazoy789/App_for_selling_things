@@ -28,6 +28,9 @@ class AdViewSet(viewsets.ModelViewSet):
         if self.action == "me":
             return Ad.objects.filter(author=self.request.user).all()
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
     @action(detail=False, methods=["get"])
     def me(self, request, *args, **kwargs):
         return super().list(self, request, *args, **kwargs)
