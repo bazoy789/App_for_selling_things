@@ -1,1 +1,3 @@
-# coursework_5
+# App for selling things
+
+### Стек Django, PostgreSQL
