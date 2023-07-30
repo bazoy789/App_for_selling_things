@@ -1,4 +1,4 @@
-# App for selling things
+# App for selling things (Продажа вещей)
 
 ### Description:
 Приложение позволяет публиковать разные вещи для продажи. 
